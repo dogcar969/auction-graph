@@ -1,0 +1,47 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Auction
+    network: sepolia
+    source:
+      address: "0xb7E8A56D0405654C618F4738776A6dC69e0A4cFD"
+      abi: Auction
+      startBlock: 5806904
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Bid
+        - ItemCanceled
+        - ItemListed
+        - ItemPass
+        - ItemSold
+        - Prepaid
+        - revertWithNotApproved
+        - revertWithOwnershipChange
+      abis:
+        - name: Auction
+          file: ./abis/Auction.json
+      eventHandlers:
+        - event: Bid(address,uint256,address,uint256)
+          handler: handleBid
+        - event: ItemCanceled(address,uint256)
+          handler: handleItemCanceled
+        - event: ItemListed(address,uint256,address,uint256)
+          handler: handleItemListed
+        - event: ItemPass(address,uint256)
+          handler: handleItemPass
+        - event: ItemSold(address,uint256,address,uint256)
+          handler: handleItemSold
+        - event: Prepaid(address,uint256)
+          handler: handlePrepaid
+        - event: revertWithNotApproved(address,uint256)
+          handler: handlerevertWithNotApproved
+        - event: revertWithOwnershipChange(address,uint256)
+          handler: handlerevertWithOwnershipChange
+      file: ./src/auction.ts
