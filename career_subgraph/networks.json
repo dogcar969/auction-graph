@@ -1,0 +1,8 @@
+{
+  "sepolia": {
+    "Auction": {
+      "address": "0x012f0D2831A175976a21d714FeDF077cF26cc3e8",
+      "startBlock": 6042420
+    }
+  }
+}
