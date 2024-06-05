@@ -3,6 +3,9 @@
     "Auction": {
       "address": "0xb7E8A56D0405654C618F4738776A6dC69e0A4cFD",
       "startBlock": 5806904
+    },
+    "AnimalNft": {
+      "address": "0x896eAfdc0B54bEaba3fA198f527011115C9e6Db8"
     }
   }
 }
