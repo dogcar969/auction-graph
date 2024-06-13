@@ -1,0 +1,11 @@
+{
+  "name": "flamingo",
+  "description": "such a flamingo",
+  "image": "ipfs://Qmf9umfhKXLRm5CPJi3eEVS297vtK6BwDG9fpGVNE3Eye9",
+  "attributes": [
+    {
+      "trait_type": "Color",
+      "value": "pink"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
-import { newMockEvent } from "matchstick-as"
-import { ethereum, Address, BigInt } from "@graphprotocol/graph-ts"
+import { newMockEvent } from "matchstick-as";
+import { ethereum, Address, BigInt } from "@graphprotocol/graph-ts";
 import {
   Bid,
   ItemCanceled,
@@ -8,8 +8,9 @@ import {
   ItemSold,
   Prepaid,
   revertWithNotApproved,
-  revertWithOwnershipChange
-} from "../generated/Auction/Auction"
+  revertWithOwnershipChange,
+} from "../generated/Auction/Auction";
+import { auctionRecord } from "../generated/schema";
 
 export function createBidEvent(
   nftAddress: Address,
@@ -17,54 +18,54 @@ export function createBidEvent(
   bider: Address,
   price: BigInt
 ): Bid {
-  let bidEvent = changetype<Bid>(newMockEvent())
+  let bidEvent = changetype<Bid>(newMockEvent());
 
-  bidEvent.parameters = new Array()
+  bidEvent.parameters = new Array();
 
   bidEvent.parameters.push(
     new ethereum.EventParam(
       "nftAddress",
       ethereum.Value.fromAddress(nftAddress)
     )
-  )
+  );
   bidEvent.parameters.push(
     new ethereum.EventParam(
       "tokenId",
       ethereum.Value.fromUnsignedBigInt(tokenId)
     )
-  )
+  );
   bidEvent.parameters.push(
     new ethereum.EventParam("bider", ethereum.Value.fromAddress(bider))
-  )
+  );
   bidEvent.parameters.push(
     new ethereum.EventParam("price", ethereum.Value.fromUnsignedBigInt(price))
-  )
+  );
 
-  return bidEvent
+  return bidEvent;
 }
 
 export function createItemCanceledEvent(
   nftAddress: Address,
   tokenId: BigInt
 ): ItemCanceled {
-  let itemCanceledEvent = changetype<ItemCanceled>(newMockEvent())
+  let itemCanceledEvent = changetype<ItemCanceled>(newMockEvent());
 
-  itemCanceledEvent.parameters = new Array()
+  itemCanceledEvent.parameters = new Array();
 
   itemCanceledEvent.parameters.push(
     new ethereum.EventParam(
       "nftAddress",
       ethereum.Value.fromAddress(nftAddress)
     )
-  )
+  );
   itemCanceledEvent.parameters.push(
     new ethereum.EventParam(
       "tokenId",
       ethereum.Value.fromUnsignedBigInt(tokenId)
     )
-  )
+  );
 
-  return itemCanceledEvent
+  return itemCanceledEvent;
 }
 
 export function createItemListedEvent(
@@ -73,54 +74,54 @@ export function createItemListedEvent(
   seller: Address,
   price: BigInt
 ): ItemListed {
-  let itemListedEvent = changetype<ItemListed>(newMockEvent())
+  let itemListedEvent = changetype<ItemListed>(newMockEvent());
 
-  itemListedEvent.parameters = new Array()
+  itemListedEvent.parameters = new Array();
 
   itemListedEvent.parameters.push(
     new ethereum.EventParam(
       "nftAddress",
       ethereum.Value.fromAddress(nftAddress)
     )
-  )
+  );
   itemListedEvent.parameters.push(
     new ethereum.EventParam(
       "tokenId",
       ethereum.Value.fromUnsignedBigInt(tokenId)
     )
-  )
+  );
   itemListedEvent.parameters.push(
     new ethereum.EventParam("seller", ethereum.Value.fromAddress(seller))
-  )
+  );
   itemListedEvent.parameters.push(
     new ethereum.EventParam("price", ethereum.Value.fromUnsignedBigInt(price))
-  )
+  );
 
-  return itemListedEvent
+  return itemListedEvent;
 }
 
 export function createItemPassEvent(
   nftAddress: Address,
   tokenId: BigInt
 ): ItemPass {
-  let itemPassEvent = changetype<ItemPass>(newMockEvent())
+  let itemPassEvent = changetype<ItemPass>(newMockEvent());
 
-  itemPassEvent.parameters = new Array()
+  itemPassEvent.parameters = new Array();
 
   itemPassEvent.parameters.push(
     new ethereum.EventParam(
       "nftAddress",
       ethereum.Value.fromAddress(nftAddress)
     )
-  )
+  );
   itemPassEvent.parameters.push(
     new ethereum.EventParam(
       "tokenId",
       ethereum.Value.fromUnsignedBigInt(tokenId)
     )
-  )
+  );
 
-  return itemPassEvent
+  return itemPassEvent;
 }
 
 export function createItemSoldEvent(
@@ -129,45 +130,45 @@ export function createItemSoldEvent(
   buyer: Address,
   price: BigInt
 ): ItemSold {
-  let itemSoldEvent = changetype<ItemSold>(newMockEvent())
+  let itemSoldEvent = changetype<ItemSold>(newMockEvent());
 
-  itemSoldEvent.parameters = new Array()
+  itemSoldEvent.parameters = new Array();
 
   itemSoldEvent.parameters.push(
     new ethereum.EventParam(
       "nftAddress",
       ethereum.Value.fromAddress(nftAddress)
     )
-  )
+  );
   itemSoldEvent.parameters.push(
     new ethereum.EventParam(
       "tokenId",
       ethereum.Value.fromUnsignedBigInt(tokenId)
     )
-  )
+  );
   itemSoldEvent.parameters.push(
     new ethereum.EventParam("buyer", ethereum.Value.fromAddress(buyer))
-  )
+  );
   itemSoldEvent.parameters.push(
     new ethereum.EventParam("price", ethereum.Value.fromUnsignedBigInt(price))
-  )
+  );
 
-  return itemSoldEvent
+  return itemSoldEvent;
 }
 
 export function createPrepaidEvent(payer: Address, value: BigInt): Prepaid {
-  let prepaidEvent = changetype<Prepaid>(newMockEvent())
+  let prepaidEvent = changetype<Prepaid>(newMockEvent());
 
-  prepaidEvent.parameters = new Array()
+  prepaidEvent.parameters = new Array();
 
   prepaidEvent.parameters.push(
     new ethereum.EventParam("payer", ethereum.Value.fromAddress(payer))
-  )
+  );
   prepaidEvent.parameters.push(
     new ethereum.EventParam("value", ethereum.Value.fromUnsignedBigInt(value))
-  )
+  );
 
-  return prepaidEvent
+  return prepaidEvent;
 }
 
 export function createrevertWithNotApprovedEvent(
@@ -176,24 +177,24 @@ export function createrevertWithNotApprovedEvent(
 ): revertWithNotApproved {
   let revertWithNotApprovedEvent = changetype<revertWithNotApproved>(
     newMockEvent()
-  )
+  );
 
-  revertWithNotApprovedEvent.parameters = new Array()
+  revertWithNotApprovedEvent.parameters = new Array();
 
   revertWithNotApprovedEvent.parameters.push(
     new ethereum.EventParam(
       "nftAddress",
       ethereum.Value.fromAddress(nftAddress)
     )
-  )
+  );
   revertWithNotApprovedEvent.parameters.push(
     new ethereum.EventParam(
       "tokenId",
       ethereum.Value.fromUnsignedBigInt(tokenId)
     )
-  )
+  );
 
-  return revertWithNotApprovedEvent
+  return revertWithNotApprovedEvent;
 }
 
 export function createrevertWithOwnershipChangeEvent(
@@ -202,22 +203,22 @@ export function createrevertWithOwnershipChangeEvent(
 ): revertWithOwnershipChange {
   let revertWithOwnershipChangeEvent = changetype<revertWithOwnershipChange>(
     newMockEvent()
-  )
+  );
 
-  revertWithOwnershipChangeEvent.parameters = new Array()
+  revertWithOwnershipChangeEvent.parameters = new Array();
 
   revertWithOwnershipChangeEvent.parameters.push(
     new ethereum.EventParam(
       "nftAddress",
       ethereum.Value.fromAddress(nftAddress)
     )
-  )
+  );
   revertWithOwnershipChangeEvent.parameters.push(
     new ethereum.EventParam(
       "tokenId",
       ethereum.Value.fromUnsignedBigInt(tokenId)
     )
-  )
+  );
 
-  return revertWithOwnershipChangeEvent
+  return revertWithOwnershipChangeEvent;
 }

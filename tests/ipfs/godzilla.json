@@ -1,0 +1,11 @@
+{
+  "name": "godzilla",
+  "description": "such a godzilla",
+  "image": "ipfs://QmVvMJxhjwtGK8sbEN8rkf2nSfNLfjsPdH7UdP6jxozXTN",
+  "attributes": [
+    {
+      "trait_type": "Color",
+      "value": "green"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "fish",
+  "description": "such a fish",
+  "image": "ipfs://QmXuaNee7MPYWtGibWHnesEN5CPdJw2tuXxwjCT7uNiUMr",
+  "attributes": [
+    {
+      "trait_type": "Color",
+      "value": "red"
+    }
+  ]
+}

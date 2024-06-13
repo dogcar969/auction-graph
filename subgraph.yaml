@@ -1,0 +1,101 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Auction
+    network: sepolia
+    source:
+      address: "0x012f0D2831A175976a21d714FeDF077cF26cc3e8"
+      abi: Auction
+      startBlock: 6042420
+    context:
+      period:
+        type: BigInt
+        data: "600"
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Bid
+        - ItemCanceled
+        - ItemListed
+        - ItemPass
+        - ItemSold
+        - Prepaid
+        - revertWithNotApproved
+        - revertWithOwnershipChange
+      abis:
+        - name: Auction
+          file: ./abis/Auction.json
+      eventHandlers:
+        - event: Bid(address,uint256,address,uint256)
+          handler: handleBid
+        - event: ItemCanceled(address,uint256)
+          handler: handleItemCanceled
+        - event: ItemListed(address,uint256,address,uint256)
+          handler: handleItemListed
+        - event: ItemPass(address,uint256)
+          handler: handleItemPass
+        - event: ItemSold(address,uint256,address,uint256)
+          handler: handleItemSold
+        - event: Prepaid(address,uint256)
+          handler: handlePrepaid
+        - event: revertWithNotApproved(address,uint256)
+          handler: handlerevertWithNotApproved
+        - event: revertWithOwnershipChange(address,uint256)
+          handler: handlerevertWithOwnershipChange
+      callHandlers:
+        - function: withdraw()
+          handler: handleWithdraw
+      file: ./src/auction.ts
+  - kind: ethereum
+    name: AnimalNft
+    network: sepolia
+    source:
+      address: "0x2F4cD2Dad9C14d3918616C3745c51320b81cad1f"
+      abi: AnimalNft
+      startBlock: 5800383
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - ApprovalForAll
+        - OwnershipTransferRequested
+        - OwnershipTransferred
+        - Transfer
+        - nftMinted
+        - nftRequested
+      abis:
+        - name: AnimalNft
+          file: ./abis/AnimalNft.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+        - event: nftMinted(uint256,address,uint8,uint256)
+          handler: handlenftMinted
+        - event: nftRequested(uint256,address)
+          handler: handlenftRequested
+      file: ./src/animal-nft.ts
+templates:
+  - name: nftMetadata
+    kind: file/ipfs
+    mapping:
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/metadata.ts
+      handler: handlenftMetadata
+      entities:
+        - nftMetadata
+      abis:
+        - name: AnimalNft
+          file: ./abis/AnimalNft.json

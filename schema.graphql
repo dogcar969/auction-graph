@@ -1,0 +1,123 @@
+# auction
+
+type listing @entity {
+  id: ID!
+  nftAddress: Bytes!
+  tokenId: BigInt!
+  expiredTime: BigInt!
+  price: BigInt!
+  seller: Bytes!
+  buyer: Bytes!
+}
+
+enum listingStatus {
+  sold
+  pass
+  canceled
+  revertWithNotApproved
+  revertWithOwnershipChange
+}
+
+type auctionRecord @entity {
+  id: ID! # hash + '-' + logindex
+  nftAddress: Bytes!
+  tokenId: BigInt!
+  price: BigInt!
+  seller: Bytes!
+  buyer: Bytes!
+  settleTime: BigInt!
+  status: listingStatus! # true means sold,false means pass
+}
+
+type user @entity {
+  id: Bytes!
+  balance: BigInt!
+}
+
+# animal nft
+
+type nftMetadata @entity(immutable: true) {
+  id: ID! # cid
+  json: String!
+}
+
+type AnimalNftUser @entity {
+  id: Bytes! #address
+  operators: [Bytes!]
+  nfts: [animalNft!] @derivedFrom(field: "owner")
+  requests: [nftRequested!] @derivedFrom(field: "requester")
+}
+type animalNft @entity {
+  id: String! # tokenId
+  approved: Bytes # operator address
+  owner: AnimalNftUser!
+  metaData: nftMetadata
+}
+
+type Transfer @entity(immutable: true) {
+  id: Bytes!
+  from: Bytes! # address
+  to: Bytes! # address
+  tokenId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type nftMinted @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt! # uint256
+  minter: Bytes! # address
+  species: Int! # uint8
+  requestId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type nftRequested @entity(immutable: true) {
+  id: Bytes!
+  requestId: BigInt! # uint256
+  requester: AnimalNftUser! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+# type OwnershipTransferRequested @entity(immutable: true) {
+#   id: Bytes!
+#   from: Bytes! # address
+#   to: Bytes! # address
+#   blockNumber: BigInt!
+#   blockTimestamp: BigInt!
+#   transactionHash: Bytes!
+# }
+
+# type OwnershipTransferred @entity(immutable: true) {
+#   id: Bytes!
+#   from: Bytes! # address
+#   to: Bytes! # address
+#   blockNumber: BigInt!
+#   blockTimestamp: BigInt!
+#   transactionHash: Bytes!
+# }
+
+# type Approval @entity(immutable: true) {
+#   id: Bytes!
+#   owner: Bytes! # address
+#   approved: Bytes! # address
+#   tokenId: BigInt! # uint256
+#   blockNumber: BigInt!
+#   blockTimestamp: BigInt!
+#   transactionHash: Bytes!
+# }
+
+# type ApprovalForAll @entity(immutable: true) {
+#   id: Bytes!
+#   owner: Bytes! # address
+#   operator: Bytes! # address
+#   approved: Boolean! # bool
+#   blockNumber: BigInt!
+#   blockTimestamp: BigInt!
+#   transactionHash: Bytes!
+# }
