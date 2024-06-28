@@ -54,7 +54,14 @@ import {
 
 import { nftMetadata as nftMetadataTemplate } from "../generated/templates";
 
-export { handlenftMetadata, handlenftMinted };
+export {
+  handlenftMetadata,
+  handlenftMinted,
+  handleApproval,
+  handleApprovalForAll,
+  handleTransfer,
+  handlenftRequested,
+};
 // 0xa16081f360e3847006db660bae1c6d1b2e17ec2a is the default address used in newMockEvent() function
 let tokenId = BigInt.fromI32(1);
 let owner = Address.fromString("0x0000000000000000000000000000000000000001");

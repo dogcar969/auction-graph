@@ -42,6 +42,15 @@ import {
   createrevertWithOwnershipChangeEvent,
 } from "./auction-utils";
 import { WithdrawCall } from "../generated/Auction/Auction";
+export {handleBid,
+  handleItemCanceled,
+  handleItemListed,
+  handleItemPass,
+  handleItemSold,
+  handlePrepaid,
+  handleWithdraw,
+  handlerevertWithNotApproved,
+  handlerevertWithOwnershipChange}
 
 let payer = Address.fromString("0xa16081f360e3847006db660bae1c6d1b2e17ec2a");
 let value = BigInt.fromI32(100);
